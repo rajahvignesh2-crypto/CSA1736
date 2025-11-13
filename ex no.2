@@ -1,0 +1,31 @@
+from collections import deque
+
+def water_jug_bfs(jug1, jug2, target):
+    visited = set()
+    queue = deque()
+    queue.append((0, 0))
+
+    while queue:
+        a, b = queue.popleft()
+        if (a, b) in visited:
+            continue
+        visited.add((a, b))
+        print(f"({a}, {b})")
+        if a == target or b == target:
+            print("\nTarget reached!")
+            return
+        queue.append((jug1, b))
+        queue.append((a, jug2))
+        queue.append((0, b))
+        queue.append((a, 0))
+        pour_to_jug2 = min(a, jug2 - b)
+        queue.append((a - pour_to_jug2, b + pour_to_jug2))
+        pour_to_jug1 = min(b, jug1 - a)
+        queue.append((a + pour_to_jug1, b - pour_to_jug1))
+    print("Target cannot be reached.")
+
+jug1_capacity = 4
+jug2_capacity = 3
+target_amount = 2
+
+water_jug_bfs(jug1_capacity, jug2_capacity, target_amount)
