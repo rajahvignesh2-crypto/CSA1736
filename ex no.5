@@ -1,0 +1,21 @@
+def vacuum_cleaner():
+    state = {'A': 'Dirty', 'B': 'Dirty'}
+    vacuum_position = 'A'
+
+    while True:
+        print(f"Vacuum at {vacuum_position}, State: {state}")
+        if state['A'] == 'Clean' and state['B'] == 'Clean':
+            print("All rooms are clean. Task completed.")
+            break
+        if state[vacuum_position] == 'Dirty':
+            print(f"Cleaning {vacuum_position}")
+            state[vacuum_position] = 'Clean'
+        else:
+            if vacuum_position == 'A':
+                print("Moving Right to B")
+                vacuum_position = 'B'
+            else:
+                print("Moving Left to A")
+                vacuum_position = 'A'
+
+vacuum_cleaner()
